@@ -1,6 +1,6 @@
 # Say Thanks
 
-A short thank-you page for GitHub Pages. Payment links and QR image paths are configured in `payments.json`.
+A compact thank-you page for GitHub Pages. Payment methods start collapsed; opening one shows its link or QR code. Cryptocurrency lets the visitor choose one network at a time.
 
 ## Configured methods
 
@@ -11,4 +11,6 @@ A short thank-you page for GitHub Pages. Payment links and QR image paths are co
 
 QR files are stored in `assets/`. Keep their file names and paths in `payments.json` in sync. The QR images and payment details are public when this site is published.
 
-To update the page, upload `index.html`, `payments.json`, `README.md`, and the complete `assets/` folder to the repository root, then commit the changes. GitHub Pages will publish the update from the configured branch.
+## Upload to GitHub Pages
+
+Extract the ZIP. On the repository's main page choose **Add file → Upload files**. Drag the `assets` folder itself into the upload area, alongside `index.html`, `payments.json`, and `README.md`. The repository root should contain `index.html` and an `assets/` folder at the same level. Commit the upload to the Pages branch.
