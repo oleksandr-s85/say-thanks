@@ -6,10 +6,10 @@ A compact thank-you page for GitHub Pages. Payment methods start collapsed; open
 
 - PayPal: PayPal.Me link and QR image, with USD shown as the currency.
 - Wise: payment link and QR image, labeled as multi-currency.
-- Monobank: cat logo and QR image, labeled UAH (₴).
+- Monobank: embedded cat logo and QR image, labeled UAH (₴).
 - Cryptocurrency: BTC, USDC (Ethereum ERC-20), USDT (Ethereum ERC-20), and USDT (TRON TRC-20), each with its own QR image and network note.
 
-QR files are stored in `assets/`. Keep their file names and paths in `payments.json` in sync. The QR images and payment details are public when this site is published.
+QR files are stored in `assets/` and resized for faster loading. They load only after a visitor opens a payment method. The small Monobank cat logo is embedded in `index.html`, so it does not depend on a separate image path. Keep QR file names and paths in `payments.json` in sync. The QR images and payment details are public when this site is published.
 
 ## Upload to GitHub Pages
 
