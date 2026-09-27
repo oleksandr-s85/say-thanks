@@ -1,49 +1,35 @@
 {
   "paypal": {
-    "url": ""
+    "url": "",
+    "currency": ""
   },
   "wise": {
     "paymentUrl": "",
+    "currencyLabel": "Multi-currency",
     "accountHolder": "",
     "email": "",
     "iban": "",
     "swift": ""
   },
+  "bankTransfer": {
+    "currency": "",
+    "bankName": "",
+    "accountHolder": "",
+    "iban": "",
+    "swift": ""
+  },
   "monobank": {
     "paymentUrl": "",
+    "currency": "UAH (₴)",
     "cardNumber": "",
     "iban": ""
   },
   "crypto": [
-    {
-      "currency": "BTC",
-      "network": "Bitcoin",
-      "address": ""
-    },
-    {
-      "currency": "ETH",
-      "network": "Ethereum",
-      "address": ""
-    },
-    {
-      "currency": "USDT",
-      "network": "TRC20",
-      "address": ""
-    },
-    {
-      "currency": "USDT",
-      "network": "ERC20",
-      "address": ""
-    },
-    {
-      "currency": "USDC",
-      "network": "Ethereum",
-      "address": ""
-    },
-    {
-      "currency": "SOL",
-      "network": "Solana",
-      "address": ""
-    }
+    { "currency": "BTC", "network": "Bitcoin", "address": "" },
+    { "currency": "ETH", "network": "Ethereum", "address": "" },
+    { "currency": "USDT", "network": "TRC20", "address": "" },
+    { "currency": "USDT", "network": "ERC20", "address": "" },
+    { "currency": "USDC", "network": "Ethereum", "address": "" },
+    { "currency": "SOL", "network": "Solana", "address": "" }
   ]
 }

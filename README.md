@@ -4,15 +4,14 @@ A short, universal thank-you page for GitHub Pages. Payment details live in `pay
 
 ## Edit payment details
 
-Open `payments.json` and fill in the relevant values:
+- `paypal.url` and `paypal.currency`: payment link and the currency you accept through PayPal.
+- `wise`: Wise payment link and recipient details. The page labels it as multi-currency.
+- `bankTransfer`: a separate bank transfer method, with its own currency, bank, account holder, IBAN, and SWIFT/BIC.
+- `monobank`: payment link and/or Ukrainian card number or IBAN. The currency is set to UAH (₴).
+- `crypto`: each entry has a currency, network, and wallet address. Keep the network explicit, especially for stablecoins.
 
-- `paypal.url`: your HTTPS PayPal payment link.
-- `wise`: optional Wise payment link, account holder, email, IBAN, and SWIFT/BIC.
-- `monobank`: optional payment link, Ukrainian card number, and/or IBAN.
-- `crypto`: each entry contains a currency, network, and wallet address. Keep the network explicit, especially for stablecoins.
-
-Leave a value empty to hide it. The page shows a “Payment details coming soon” note for a method with no configured details. Copy buttons show the thank-you message after the address or bank detail is copied; payment links show it when opened.
+Leave details empty to show “Payment details coming soon.” Copy buttons show the thank-you message after a detail is copied; payment links show it when opened. To publish edits, commit the updated `payments.json` to the repository's Pages source branch.
 
 ## Publish with GitHub Pages
 
-In the repository, open **Settings → Pages**, choose **Deploy from a branch**, select `main` and `/ (root)`, and save. GitHub Pages will publish `index.html` and `payments.json` from the repository root.
+In the repository, open **Settings → Pages**, choose **Deploy from a branch**, select `main` and `/ (root)`, and save.
