@@ -45,12 +45,13 @@
     .methods { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; padding: 0 clamp(1rem, 5vw, 2.4rem) 1.5rem; }
     .method { min-width: 0; padding: .85rem .95rem; border: 1px solid var(--line); border-radius: 17px; background: #fff; align-self: start; }
     .method[open] { grid-column: 1 / -1; border-color: #cdd8ea; box-shadow: 0 10px 28px rgba(30, 53, 100, .07); }
-    .method-top { display: grid; grid-template-columns: minmax(0, 1fr) auto .8rem; align-items: center; gap: .65rem; cursor: pointer; list-style: none; }
+    .method-top { display: grid; grid-template-columns: minmax(0, 1fr) .8rem; align-items: center; column-gap: .65rem; row-gap: .2rem; cursor: pointer; list-style: none; }
     .method-top::-webkit-details-marker { display: none; }
     .method-top:focus-visible { outline: 3px solid #9bb5ff; outline-offset: 4px; border-radius: 6px; }
-    .method-top::after { content: ""; justify-self: end; width: .55rem; height: .55rem; border-right: 2px solid #8290a7; border-bottom: 2px solid #8290a7; transform: rotate(45deg) translateY(-2px); transition: transform .15s ease; }
+    .method-top::after { content: ""; grid-column: 2; grid-row: 1 / span 2; justify-self: center; width: .55rem; height: .55rem; border-right: 2px solid #8290a7; border-bottom: 2px solid #8290a7; transform: rotate(45deg) translateY(-2px); transition: transform .15s ease; }
     .method[open] > .method-top::after { transform: rotate(225deg) translate(-2px, -1px); }
     h2 { display: flex; align-items: center; gap: .6rem; margin: 0; font-size: 1.05rem; line-height: 1.35; font-weight: 700; }
+    .method-top h2 { grid-column: 1; grid-row: 1; min-width: 0; overflow-wrap: anywhere; }
     .brand-icon { width: 1.55rem; height: 1.55rem; flex: 0 0 auto; }
     svg.brand-icon { fill: currentColor; }
     .brand-paypal { color: #003087; }
@@ -62,19 +63,21 @@
     .brand-usdc { color: #2775ca; }
     .brand-solana { color: #7855ff; }
     h2 .monobank-cat { width: 2.1rem; height: 2.1rem; object-fit: contain; }
-    .method-meta { flex: 0 0 auto; padding: .32rem .58rem; border-radius: 99px; background: #f0f4fb; color: #53627c; font-size: .78rem; font-weight: 650; }
+    .method-meta { grid-column: 1; grid-row: 2; justify-self: start; margin-left: 2.15rem; padding: .22rem .52rem; border-radius: 99px; background: #f0f4fb; color: #53627c; font-size: .75rem; font-weight: 650; }
+    .method-meta:empty, .method-meta[hidden] { display: none; }
     .method > .content { margin-top: .9rem; }
-    .payment-content { display: flex; flex-direction: column; align-items: flex-start; gap: .85rem; }
-    .payment-content .action { width: min(100%, 19rem); }
-    .payment-content .qr-block { width: min(100%, 200px); margin: 0; }
-    .payment-content .qr-caption { text-align: left; }
+    .payment-content { display: flex; flex-direction: column; align-items: center; gap: .8rem; text-align: center; }
+    .payment-description { align-self: stretch; margin: 0; color: var(--muted); font-size: .92rem; line-height: 1.5; text-align: center; }
+    .payment-content .action { width: auto; max-width: 100%; align-self: center; }
+    .payment-content .qr-block { width: min(100%, 210px); margin: 0; }
+    .payment-content .qr-caption { text-align: center; }
     .mono-content { display: flex; justify-content: center; }
-    .action-paypal { background: #0070e0; }
-    .action-paypal .brand-icon { color: #fff; }
-    .action-paypal:hover { background: #005eb8; }
-    .action-wise { background: #9fe870; color: #163300; }
-    .action-wise .brand-icon { color: #163300; }
-    .action-wise:hover { background: #8add58; }
+    .action-paypal { border: 1px solid #d7e5f8; background: #f0f6ff; color: #14549a; }
+    .action-paypal .brand-icon { color: #14549a; }
+    .action-paypal:hover { background: #e4efff; }
+    .action-wise { border: 1px solid #d8ecd0; background: #f1f9ed; color: #285927; }
+    .action-wise .brand-icon { color: #285927; }
+    .action-wise:hover { background: #e7f4df; }
     .qr-block { width: min(100%, 220px); margin-top: .9rem; }
     .qr-link { display: block; padding: .45rem; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
     .qr-image { display: block; width: 100%; height: auto; border-radius: 9px; }
@@ -88,12 +91,12 @@
     .coin-option { display: inline-flex; min-height: 2.2rem; align-items: center; gap: .35rem; padding: .4rem .6rem; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--ink); font: inherit; font-size: .78rem; font-weight: 650; cursor: pointer; }
     .coin-option .brand-icon { width: 1rem; height: 1rem; }
     .coin-option[aria-pressed="true"] { border-color: #244cc9; background: #eef3ff; color: #244cc9; }
-    .coin-panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(115px, 40%); align-items: center; gap: .8rem; margin-top: .8rem; }
-    .coin-panel .qr-block { width: 100%; margin: 0; }
+    .coin-panel { display: flex; flex-direction: column; align-items: center; gap: .8rem; margin-top: .8rem; }
+    .coin-panel .qr-block { width: min(100%, 210px); margin: 0; }
     .coin-panel .qr-caption { text-align: center; }
-    .coin-panel-info { min-width: 0; }
-    .coin-panel-title { display: flex; align-items: center; gap: .45rem; margin: 0; font-size: .92rem; }
-    .coin-panel-note { margin: .4rem 0 0; color: var(--muted); font-size: .8rem; line-height: 1.45; }
+    .coin-panel-info { width: 100%; min-width: 0; text-align: center; }
+    .coin-panel-title { display: flex; align-items: center; justify-content: center; gap: .45rem; margin: 0; font-size: .98rem; }
+    .coin-panel-note { margin: .4rem auto 0; max-width: 34rem; color: var(--muted); font-size: .84rem; line-height: 1.45; }
     .items { display: grid; gap: .6rem; margin-top: .9rem; }
     .item { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: .75rem; padding: .75rem .8rem; border-radius: 12px; background: #f7f9fc; }
     .item-label { display: flex; align-items: center; gap: .5rem; font-size: .91rem; font-weight: 650; }
@@ -105,8 +108,8 @@
     footer { padding: 1rem; border-top: 1px solid #edf0f5; color: var(--muted); text-align: center; font-size: .84rem; }
     #toast { position: fixed; z-index: 5; right: 1rem; bottom: 1rem; max-width: min(25rem, calc(100vw - 2rem)); padding: .9rem 1.1rem; border-radius: 13px; background: #16233c; color: #fff; box-shadow: 0 12px 32px rgba(10, 20, 40, .23); font-size: .96rem; line-height: 1.45; opacity: 0; pointer-events: none; transform: translateY(.5rem); transition: opacity .18s ease, transform .18s ease; }
     #toast.show { opacity: 1; transform: translateY(0); }
-    @media (max-width: 600px) { .methods { grid-template-columns: 1fr; } .method { padding: .8rem .9rem; } .method-top h2 { font-size: .98rem; } .method-meta { font-size: .72rem; } .payment-content, .coin-panel { gap: .7rem; } .coin-panel .qr-block { width: 100%; justify-self: stretch; } }
-    @media (max-width: 380px) { .coin-panel { grid-template-columns: 1fr; } .coin-panel .qr-block { width: min(100%, 175px); justify-self: center; } }
+    @media (max-width: 600px) { .methods { grid-template-columns: 1fr; } .method { padding: .8rem .9rem; } .method-top h2 { font-size: .98rem; } .method-meta { font-size: .72rem; } .payment-content, .coin-panel { gap: .7rem; } }
+    @media (max-width: 380px) { .coin-panel .qr-block { width: min(100%, 175px); } }
     @media (max-width: 460px) { body { padding: .8rem; } .card { border-radius: 21px; } header { padding-inline: 1rem; } h1 { font-size: clamp(1.05rem, 6vw, 1.45rem); } .item { padding: .7rem; } .action { padding-inline: .75rem; } }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
   </style>
@@ -246,6 +249,12 @@
         row.append(info, button);
         section.querySelector('.content').append(row);
       }
+      function addDescription(section, text) {
+        const description = document.createElement('p');
+        description.className = 'payment-description';
+        description.textContent = text;
+        section.querySelector('.content').append(description);
+      }
       function addLink(section, url, label = 'Open payment') {
         const link = document.createElement('a');
         link.className = 'action';
@@ -292,6 +301,7 @@
         .then(data => {
           const paypal = document.querySelector('#paypal');
           setMeta(paypal, data.paypal?.currency ? `Currency · ${data.paypal.currency}` : '');
+          addDescription(paypal, data.paypal?.currency ? `Support via PayPal · ${data.paypal.currency}.` : 'Support via PayPal.');
           let paypalCount = 0;
           if (validUrl(data.paypal?.url || '')) { addLink(paypal, data.paypal.url, 'Pay with PayPal'); paypalCount++; }
           if (addQr(paypal.querySelector('.content'), data.paypal?.qrImage, 'PayPal payment QR code', 'Scan to open your PayPal payment page.')) paypalCount++;
@@ -299,6 +309,7 @@
 
           const wise = document.querySelector('#wise');
           setMeta(wise, data.wise?.currencyLabel || 'Multi-currency');
+          addDescription(wise, 'Send with Wise. Multi-currency payments are available.');
           let wiseCount = 0;
           if (validUrl(data.wise?.paymentUrl || '')) { addLink(wise, data.wise.paymentUrl, 'Send with Wise'); wiseCount++; }
           if (addQr(wise.querySelector('.content'), data.wise?.qrImage, 'Wise payment QR code', 'Scan to open your Wise payment link.')) wiseCount++;
@@ -310,6 +321,7 @@
 
           const mono = document.querySelector('#monobank');
           setMeta(mono, data.monobank?.currency || 'UAH (₴)');
+          addDescription(mono, 'Scan with Monobank or another banking app. Payments are in Ukrainian hryvnia (UAH).');
           let monoCount = 0;
           if (validUrl(data.monobank?.paymentUrl || '')) { addLink(mono, data.monobank.paymentUrl, 'Open Monobank'); monoCount++; }
           if (addQr(mono.querySelector('.content'), data.monobank?.qrImage, 'Monobank payment QR code', 'Scan with a banking app to pay in UAH (₴).')) monoCount++;
@@ -321,6 +333,7 @@
 
           const crypto = document.querySelector('#crypto');
           const coins = (Array.isArray(data.crypto) ? data.crypto : []).filter(coin => coin && (coin.qrImage || (typeof coin.address === 'string' && coin.address.trim())));
+          setMeta(crypto, '');
           if (!coins.length) { setEmpty(crypto); return; }
           const picker = document.createElement('div');
           picker.className = 'coin-options';
@@ -357,8 +370,8 @@
             option.type = 'button';
             option.className = 'coin-option';
             option.setAttribute('aria-pressed', String(index === 0));
-            const networkShort = coin.network?.match(/(ERC-20|TRC-20)/)?.[0];
-            option.append(makeIcon(iconClasses[coin.currency] || 'bitcoin'), document.createTextNode(`${coin.currency}${networkShort ? ` · ${networkShort}` : ''}`));
+            const optionLabel = coin.network ? `${coin.currency} · ${coin.network}` : coin.currency;
+            option.append(makeIcon(iconClasses[coin.currency] || 'bitcoin'), document.createTextNode(optionLabel));
             option.addEventListener('click', () => {
               picker.querySelectorAll('.coin-option').forEach(button => button.setAttribute('aria-pressed', 'false'));
               option.setAttribute('aria-pressed', 'true');
