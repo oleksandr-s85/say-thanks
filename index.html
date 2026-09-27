@@ -19,6 +19,7 @@
       --pink: #e94361;
       --shadow: 0 24px 70px rgba(30, 53, 100, .11);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 15px;
     }
     * { box-sizing: border-box; }
     body {
@@ -50,8 +51,8 @@
     .method-top:focus-visible { outline: 3px solid #9bb5ff; outline-offset: 4px; border-radius: 6px; }
     .method-top::after { content: ""; grid-column: 1 / -1; grid-row: 2; justify-self: center; width: .55rem; height: .55rem; border-right: 2px solid #8290a7; border-bottom: 2px solid #8290a7; transform: rotate(45deg) translateY(-2px); transition: transform .15s ease; }
     .method[open] > .method-top::after { transform: rotate(225deg) translate(-2px, -1px); }
-    h2 { display: flex; align-items: center; gap: .6rem; margin: 0; font-size: 1.05rem; line-height: 1.35; font-weight: 700; }
-    .method-top h2 { grid-column: 1; grid-row: 1; min-width: 0; overflow-wrap: anywhere; }
+    h2 { display: flex; align-items: center; gap: .6rem; margin: 0; font-size: 1rem; line-height: 1.35; font-weight: 700; }
+    .method-top h2 { grid-column: 1; grid-row: 1; min-width: 0; white-space: nowrap; }
     .brand-icon { width: 1.55rem; height: 1.55rem; flex: 0 0 auto; }
     svg.brand-icon:not([fill]) { fill: currentColor; }
     .brand-paypal { color: #003087; }
@@ -63,7 +64,7 @@
     .brand-usdc { color: #2775ca; }
     .brand-solana { color: #7855ff; }
     h2 .monobank-cat { width: 2.1rem; height: 2.1rem; object-fit: contain; }
-    .method-meta { grid-column: 2; grid-row: 1; justify-self: end; margin: 0; padding: .16rem .4rem; border-radius: 99px; background: #f0f4fb; color: #53627c; font-size: .66rem; font-weight: 650; white-space: nowrap; }
+    .method-meta { grid-column: 2; grid-row: 1; justify-self: end; margin: 0; padding: .16rem .4rem; border-radius: 99px; background: #f0f4fb; color: #53627c; font-size: .62rem; font-weight: 650; white-space: nowrap; }
     .method-meta:empty, .method-meta[hidden] { display: none; }
     .method > .content { margin-top: .9rem; }
     .payment-content { display: flex; flex-direction: column; align-items: center; gap: .8rem; text-align: center; }
@@ -110,7 +111,7 @@
     footer { padding: 1rem; border-top: 1px solid #edf0f5; color: var(--muted); text-align: center; font-size: .84rem; }
     #toast { position: fixed; z-index: 5; right: 1rem; bottom: 1rem; max-width: min(25rem, calc(100vw - 2rem)); padding: .9rem 1.1rem; border-radius: 13px; background: #16233c; color: #fff; box-shadow: 0 12px 32px rgba(10, 20, 40, .23); font-size: .96rem; line-height: 1.45; opacity: 0; pointer-events: none; transform: translateY(.5rem); transition: opacity .18s ease, transform .18s ease; }
     #toast.show { opacity: 1; transform: translateY(0); }
-    @media (max-width: 600px) { .methods { grid-template-columns: 1fr; } .method { padding: .8rem .9rem; } .method-top h2 { font-size: .98rem; } .method-meta { font-size: .72rem; } .payment-content, .coin-panel { gap: .7rem; } }
+    @media (max-width: 600px) { .methods { grid-template-columns: 1fr; } .method { padding: .8rem .9rem; } .method-top h2 { font-size: .94rem; } .method-meta { font-size: .62rem; } .payment-content, .coin-panel { gap: .7rem; } }
     @media (max-width: 380px) { .coin-panel .qr-block { width: min(100%, 175px); } }
     @media (max-width: 460px) { body { padding: .8rem; } .card { border-radius: 21px; } header { padding-inline: 1rem; } h1 { font-size: clamp(1.05rem, 6vw, 1.45rem); } .item { padding: .7rem; } .action { padding-inline: .75rem; } }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
