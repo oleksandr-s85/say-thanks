@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8fc">
+  <meta name="description" content="A simple way to send a thank-you.">
+  <title>❤️ Send a Thank You</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #14213a;
+      --muted: #63718a;
+      --page: #f6f8fc;
+      --surface: #fff;
+      --line: #e2e8f1;
+      --blue: #244cc9;
+      --blue-hover: #193da9;
+      --pink: #e94361;
+      --shadow: 0 24px 70px rgba(30, 53, 100, .11);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 2rem 1rem;
+      color: var(--ink);
+      background: radial-gradient(ellipse at 12% 8%, rgba(63, 108, 228, .11), transparent 32rem), var(--page);
+    }
+    main { width: min(100%, 660px); }
+    .card {
+      overflow: hidden;
+      border: 1px solid rgba(28, 49, 90, .08);
+      border-radius: 26px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    header { padding: clamp(2rem, 7vw, 3.25rem) clamp(1.3rem, 7vw, 3.25rem) 1.7rem; text-align: center; }
+    h1 { margin: 0; font-size: clamp(2rem, 6vw, 3rem); line-height: 1.12; letter-spacing: -.05em; font-weight: 760; }
+    header p { margin: .9rem auto 0; max-width: 32rem; color: var(--muted); font-size: 1.05rem; line-height: 1.55; }
+    .methods { display: grid; gap: .8rem; padding: 0 clamp(1rem, 5vw, 2.4rem) 2rem; }
+    .method { min-width: 0; padding: 1.05rem 1.15rem; border: 1px solid var(--line); border-radius: 17px; }
+    .method-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    h2 { margin: 0; font-size: 1.05rem; line-height: 1.35; font-weight: 700; }
+    .hint { color: var(--muted); font-size: .9rem; }
+    .items { display: grid; gap: .6rem; margin-top: .9rem; }
+    .item { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: .75rem; padding: .75rem .8rem; border-radius: 12px; background: #f7f9fc; }
+    .item-label { font-size: .91rem; font-weight: 650; }
+    .item-value { overflow-wrap: anywhere; margin-top: .2rem; color: var(--muted); font-size: .86rem; line-height: 1.4; }
+    .action { display: inline-flex; min-height: 2.7rem; align-items: center; justify-content: center; flex: 0 0 auto; padding: .62rem .9rem; border: 0; border-radius: 11px; background: var(--blue); color: #fff; font: inherit; font-size: .91rem; font-weight: 650; text-decoration: none; cursor: pointer; transition: background .15s ease, transform .15s ease; }
+    .action:hover { background: var(--blue-hover); transform: translateY(-1px); }
+    .action:focus-visible { outline: 3px solid #9bb5ff; outline-offset: 3px; }
+    .empty { margin-top: .7rem; color: var(--muted); font-size: .92rem; }
+    footer { padding: 1rem; border-top: 1px solid #edf0f5; color: var(--muted); text-align: center; font-size: .84rem; }
+    #toast { position: fixed; z-index: 5; right: 1rem; bottom: 1rem; max-width: min(25rem, calc(100vw - 2rem)); padding: .9rem 1.1rem; border-radius: 13px; background: #16233c; color: #fff; box-shadow: 0 12px 32px rgba(10, 20, 40, .23); font-size: .96rem; line-height: 1.45; opacity: 0; pointer-events: none; transform: translateY(.5rem); transition: opacity .18s ease, transform .18s ease; }
+    #toast.show { opacity: 1; transform: translateY(0); }
+    @media (max-width: 460px) { body { padding: .8rem; } .card { border-radius: 21px; } .method { padding: .95rem; } .item { padding: .7rem; } .action { padding-inline: .75rem; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="card" aria-labelledby="page-title">
+      <header>
+        <h1 id="page-title">❤️ Send a Thank You</h1>
+        <p>Choose whichever way feels right. Every kind gesture is appreciated.</p>
+      </header>
+      <div class="methods" id="methods" aria-live="polite">
+        <section class="method" id="paypal">
+          <div class="method-top"><h2>PayPal</h2></div>
+          <div class="content"></div>
+        </section>
+        <section class="method" id="wise">
+          <div class="method-top"><h2>Wise / bank transfer</h2></div>
+          <div class="content"></div>
+        </section>
+        <section class="method" id="monobank">
+          <div class="method-top"><h2>Monobank</h2></div>
+          <div class="content"></div>
+        </section>
+        <section class="method" id="crypto">
+          <div class="method-top"><h2>Cryptocurrency</h2></div>
+          <div class="content"></div>
+        </section>
+      </div>
+      <footer>Thank you for being here.</footer>
+    </section>
+  </main>
+  <div id="toast" role="status" aria-live="polite">❤️ Thank you for your support!</div>
+  <script>
+    (() => {
+      const toast = document.getElementById('toast');
+      let timer;
+      function showThanks() {
+        toast.classList.add('show');
+        clearTimeout(timer);
+        timer = setTimeout(() => toast.classList.remove('show'), 3200);
+      }
+      function setEmpty(section) {
+        const message = document.createElement('p');
+        message.className = 'empty';
+        message.textContent = 'Payment details coming soon.';
+        section.querySelector('.content').replaceChildren(message);
+      }
+      function addItem(section, label, value, actionText = 'Copy') {
+        const row = document.createElement('div');
+        row.className = 'item';
+        const info = document.createElement('div');
+        const itemLabel = document.createElement('div');
+        itemLabel.className = 'item-label';
+        itemLabel.textContent = label;
+        const itemValue = document.createElement('div');
+        itemValue.className = 'item-value';
+        itemValue.textContent = value;
+        info.append(itemLabel, itemValue);
+        const button = document.createElement('button');
+        button.className = 'action';
+        button.type = 'button';
+        button.textContent = actionText;
+        button.setAttribute('aria-label', `${actionText} ${label}`);
+        button.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(value);
+            showThanks();
+          } catch {
+            const input = document.createElement('textarea');
+            input.value = value;
+            input.setAttribute('readonly', '');
+            input.style.position = 'fixed';
+            input.style.opacity = '0';
+            document.body.append(input);
+            input.select();
+            const copied = document.execCommand('copy');
+            input.remove();
+            if (copied) showThanks();
+          }
+        });
+        row.append(info, button);
+        section.querySelector('.content').append(row);
+      }
+      function addLink(section, url, label = 'Open payment') {
+        const link = document.createElement('a');
+        link.className = 'action';
+        link.href = url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = label;
+        link.addEventListener('click', showThanks);
+        section.querySelector('.content').append(link);
+      }
+      function validUrl(value) {
+        try { return new URL(value).protocol === 'https:'; } catch { return false; }
+      }
+      fetch('./payments.json', { cache: 'no-store' })
+        .then(response => { if (!response.ok) throw new Error('Payment settings unavailable'); return response.json(); })
+        .then(data => {
+          const paypal = document.querySelector('#paypal');
+          if (validUrl(data.paypal?.url || '')) addLink(paypal, data.paypal.url, 'Open PayPal');
+          else setEmpty(paypal);
+
+          const wise = document.querySelector('#wise');
+          let wiseCount = 0;
+          if (validUrl(data.wise?.paymentUrl || '')) { addLink(wise, data.wise.paymentUrl, 'Open Wise'); wiseCount++; }
+          for (const [key, label] of [['accountHolder', 'Account holder'], ['email', 'Wise email'], ['iban', 'IBAN'], ['swift', 'SWIFT / BIC']]) {
+            const value = data.wise?.[key];
+            if (typeof value === 'string' && value.trim()) { addItem(wise, label, value.trim()); wiseCount++; }
+          }
+          if (!wiseCount) setEmpty(wise);
+
+          const mono = document.querySelector('#monobank');
+          let monoCount = 0;
+          if (validUrl(data.monobank?.paymentUrl || '')) { addLink(mono, data.monobank.paymentUrl, 'Open Monobank'); monoCount++; }
+          for (const [key, label] of [['cardNumber', 'Card number'], ['iban', 'IBAN']]) {
+            const value = data.monobank?.[key];
+            if (typeof value === 'string' && value.trim()) { addItem(mono, label, value.trim()); monoCount++; }
+          }
+          if (!monoCount) setEmpty(mono);
+
+          const crypto = document.querySelector('#crypto');
+          let cryptoCount = 0;
+          for (const coin of Array.isArray(data.crypto) ? data.crypto : []) {
+            if (typeof coin?.address !== 'string' || !coin.address.trim()) continue;
+            const label = `${coin.currency || 'Crypto'} · ${coin.network || 'Network'}`;
+            addItem(crypto, label, coin.address.trim(), 'Copy address');
+            cryptoCount++;
+          }
+          if (!cryptoCount) setEmpty(crypto);
+        })
+        .catch(() => document.querySelectorAll('.method').forEach(setEmpty));
+    })();
+  </script>
+</body>
+</html>
