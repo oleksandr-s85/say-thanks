@@ -1,17 +1,14 @@
 # Say Thanks
 
-A short, universal thank-you page for GitHub Pages. Payment details live in `payments.json`, so they can be changed without editing the page design.
+A short thank-you page for GitHub Pages. Payment links and QR image paths are configured in `payments.json`.
 
-## Edit payment details
+## Configured methods
 
-- `paypal.url` and `paypal.currency`: payment link and the currency you accept through PayPal.
-- `wise`: Wise payment link and recipient details. The page labels it as multi-currency.
-- `bankTransfer`: a separate bank transfer method, with its own currency, bank, account holder, IBAN, and SWIFT/BIC.
-- `monobank`: payment link and/or Ukrainian card number or IBAN. The currency is set to UAH (₴).
-- `crypto`: each entry has a currency, network, and wallet address. Keep the network explicit, especially for stablecoins.
+- PayPal: PayPal.Me link and QR image. Leave `currency` blank to hide the currency badge.
+- Wise: payment link and QR image, labeled as multi-currency.
+- Monobank: cat logo and QR image, labeled UAH (₴).
+- Cryptocurrency: BTC, USDC (Ethereum ERC-20), USDT (Ethereum ERC-20), and USDT (TRON TRC-20), each with its own QR image and network note.
 
-Leave details empty to show “Payment details coming soon.” Copy buttons show the thank-you message after a detail is copied; payment links show it when opened. To publish edits, commit the updated `payments.json` to the repository's Pages source branch.
+QR files are stored in `assets/`. Keep their file names and paths in `payments.json` in sync. The QR images and payment details are public when this site is published.
 
-## Publish with GitHub Pages
-
-In the repository, open **Settings → Pages**, choose **Deploy from a branch**, select `main` and `/ (root)`, and save.
+To update the page, upload `index.html`, `payments.json`, `README.md`, and the complete `assets/` folder to the repository root, then commit the changes. GitHub Pages will publish the update from the configured branch.

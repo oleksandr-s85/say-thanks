@@ -1,35 +1,42 @@
 {
   "paypal": {
     "url": "https://paypal.me/OleksandrStrekozov",
-    "currency": ""
+    "currency": "",
+    "qrImage": "assets/paypal-qr.png"
   },
   "wise": {
-    "paymentUrl": "",
+    "paymentUrl": "https://wise.com/pay/me/oleksandrs4084",
     "currencyLabel": "Multi-currency",
-    "accountHolder": "",
-    "email": "",
-    "iban": "",
-    "swift": ""
-  },
-  "bankTransfer": {
-    "currency": "",
-    "bankName": "",
-    "accountHolder": "",
-    "iban": "",
-    "swift": ""
+    "qrImage": "assets/wise-qr.png"
   },
   "monobank": {
-    "paymentUrl": "",
     "currency": "UAH (₴)",
-    "cardNumber": "",
-    "iban": ""
+    "qrImage": "assets/monobank-qr.png"
   },
   "crypto": [
-    { "currency": "BTC", "network": "Bitcoin", "address": "" },
-    { "currency": "ETH", "network": "Ethereum", "address": "" },
-    { "currency": "USDT", "network": "TRC20", "address": "" },
-    { "currency": "USDT", "network": "ERC20", "address": "" },
-    { "currency": "USDC", "network": "Ethereum", "address": "" },
-    { "currency": "SOL", "network": "Solana", "address": "" }
+    {
+      "currency": "BTC",
+      "network": "Bitcoin Mainnet",
+      "qrImage": "assets/bitcoin-qr.png",
+      "note": "Only BTC on Bitcoin Mainnet. Transfers under 0.0001 BTC are not credited."
+    },
+    {
+      "currency": "USDC",
+      "network": "Ethereum ERC-20",
+      "qrImage": "assets/usdc-erc20-qr.png",
+      "note": "Send only USDC on ERC-20. Minimum transfer: 5 USDC."
+    },
+    {
+      "currency": "USDT",
+      "network": "Ethereum ERC-20",
+      "qrImage": "assets/usdt-erc20-qr.png",
+      "note": "Send only USDT on ERC-20. Minimum transfer: 5 USDT."
+    },
+    {
+      "currency": "USDT",
+      "network": "TRON TRC-20",
+      "qrImage": "assets/usdt-trc20-qr.png",
+      "note": "Send only USDT on TRC-20. Minimum transfer: 5 USDT."
+    }
   ]
 }
