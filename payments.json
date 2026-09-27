@@ -1,7 +1,7 @@
 {
   "paypal": {
     "url": "https://paypal.me/OleksandrStrekozov",
-    "currency": "",
+    "currency": "USD",
     "qrImage": "assets/paypal-qr.png"
   },
   "wise": {
